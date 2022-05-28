@@ -1,0 +1,7 @@
+{
+  "name": "upScale",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
