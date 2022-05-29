@@ -1,6 +1,23 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
 
+:root {
+	--ion-color-custombg: #3670e5;
+	--ion-color-custombg-rgb: 54,112,229;
+	--ion-color-custombg-contrast: #ffffff;
+	--ion-color-custombg-contrast-rgb: 255,255,255;
+	--ion-color-custombg-shade: #3063ca;
+	--ion-color-custombg-tint: #4a7ee8;
+}
+
+.ion-color-custombg {
+	--ion-color-base: var(--ion-color-custombg);
+	--ion-color-base-rgb: var(--ion-color-custombg-rgb);
+	--ion-color-contrast: var(--ion-color-custombg-contrast);
+	--ion-color-contrast-rgb: var(--ion-color-custombg-contrast-rgb);
+	--ion-color-shade: var(--ion-color-custombg-shade);
+	--ion-color-tint: var(--ion-color-custombg-tint);
+}
 /** Ionic CSS Variables **/
 :root {
   /** primary **/
@@ -68,7 +85,7 @@
   --ion-color-medium-tint: #9d9fa6;
 
   /** light **/
-  --ion-color-light: #f4f5f8;
+  --ion-color-light: #ffffff;
   --ion-color-light-rgb: 244, 245, 248;
   --ion-color-light-contrast: #000000;
   --ion-color-light-contrast-rgb: 0, 0, 0;
