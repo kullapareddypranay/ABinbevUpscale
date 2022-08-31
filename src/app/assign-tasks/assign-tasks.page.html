@@ -1,0 +1,110 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Assign Tasks</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/Account"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <!-- <ion-accordion-group style="margin-bottom:2px">
+    <ion-accordion value="first">
+      <ion-item slot="header" color="light">
+        
+            View the status of completion by users
+        
+      </ion-item>
+     
+    
+      <div class="ion-padding" slot="content">
+       <ion-list lines="none">
+        <ion-item>
+          will see here
+        </ion-item>
+       
+       </ion-list>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+   -->
+      <ion-item>
+        Assign the onboarding tasks to new joins 
+      </ion-item>
+    
+      <ion-card>
+        
+          <div *ngFor="let task of tasks;let i=index;">
+            <ion-card-header>
+              <ion-card-title class="ion-text-start">
+                <ion-label>
+                  <h2>{{task.user.name | titlecase}}</h2>
+                </ion-label>
+              </ion-card-title>
+            </ion-card-header>
+           <ion-card-content>
+            <ion-list lines="none">
+              <ion-item *ngFor="let ele of task.tasks">
+                <ion-label>
+                  <h3>{{ele.task}}</h3>
+                  
+                </ion-label>
+                <ion-badge color="success" *ngIf="ele.status===true">Done</ion-badge>
+                <ion-badge color="danger" *ngIf="ele.status===false">Not completed</ion-badge>
+              </ion-item>
+            </ion-list>
+           
+
+           
+            <ion-list>
+              <ion-item>
+                <ion-label position="floating">
+                  <h2>Add new Task</h2>
+                 
+                </ion-label>
+                <ion-input type="text" name="task" [(ngModel)]="newtask"></ion-input>
+                <ion-button slot="end" (click)="onAdd(i,task._id,task.user._id)" fill="clear">Add</ion-button>
+              </ion-item>
+            </ion-list>
+          
+           
+           </ion-card-content>
+           
+           
+          </div>
+      
+      </ion-card>
+    
+      
+     <!-- <form  >
+      
+      <div  style="padding:0px 13px">
+      <ng-select
+        placeholder="users"
+        name="selected users"
+        [items]="users"
+        bindLabel="name"
+        bindValue="_id"
+        [multiple]="true"
+        [(ngModel)]="selectedusers">
+        <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+          <div class="ng-value" *ngFor="let item of (items ? items: [])">
+            <span class="ng-value-label">{{ item.name }}({{item.email}})</span>
+            <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+          </div>
+         
+        </ng-template>
+        <ng-template ng-option-tmp let-item="item" let-search="searchTerm" let-index="index">
+          <span >{{ item.name + ' (' + item.email + ')' }}</span>
+        </ng-template>
+    </ng-select>
+      </div>
+
+
+      
+     
+     </form> -->
+    
+  
+</ion-content>

@@ -1,0 +1,199 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/Home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Add Project</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+ 
+    <form (ngSubmit)="onAdd()" [formGroup]="projectForm">
+      <div>
+      
+        <ion-item>
+          <ion-label position="floating">Project Title</ion-label>
+       
+          <ion-input name="projecttile" clearInput formControlName="projecttitle" placeholder="Project Name"
+            [ngClass]="{'is-invalid': submitted && f.projecttitle.errors}" required>
+          </ion-input>
+
+        </ion-item>
+        <div *ngIf="submitted && f.projecttitle.errors">
+          <div *ngIf="f.projecttitle.errors.required">
+            <ion-text>Project title is required</ion-text>
+          </div>
+        </div>
+      </div>
+
+      <ion-item>
+        <ion-label position="floating">Project Description</ion-label>
+     
+        <ion-input name="projectdescription" clearInput formControlName="projectdescription" placeholder="projectdescription"
+          [ngClass]="{'is-invalid': submitted && f.projectdescription.errors}" required>
+        </ion-input>
+      </ion-item>
+        <div *ngIf="submitted && f.projectdescription.errors">
+          <div *ngIf="f.projectdescription.errors.required">
+            <ion-text>Project Description is required</ion-text>
+          </div>
+        </div>
+     
+      <ion-item>
+        <ion-label position="floating">Project start date</ion-label>
+        <ion-input value="{{date |date}}" id="date" clearInput formControlName="projectstartdate"   [ngClass]="{'is-invalid': submitted && f.projectstartdate.errors}" required></ion-input>   
+        <ion-popover trigger="date" size="cover">
+          <ng-template>
+            <ion-datetime   #datetime presentation="date" displayFormat="YYYY-MM-DD"  [(ngModel)]="date"  [ngModelOptions]="{standalone: true}" required  >
+              <ion-buttons slot="buttons">
+                <ion-button color="danger" (click)="datetime.reset()" >Reset</ion-button>
+                <ion-button color="primary" (click)="datetime.cancel()" (click)="cancel()">Never mind</ion-button>
+                <ion-button color="primary" (click)="datetime.confirm()" (click)="close()">All Set</ion-button>
+              </ion-buttons>
+            </ion-datetime>
+     
+          </ng-template>
+
+        </ion-popover>
+        
+      </ion-item>
+      <div *ngIf="submitted && f.projectstartdate.errors">
+        <div *ngIf="f.projectstartdate.errors.required">
+          <ion-text>Project start date is required</ion-text>
+        </div>
+      </div>
+
+      <div style="padding:0px 13px">
+      
+        <ng-select style="margin-top: 10px;" [items]="items$ "
+        bindLabel="name"
+        bindValue="_id"
+        [closeOnSelect]="true"
+        [multiple]="true"
+        [hideSelected]="true"
+        [typeahead]="input$"
+        placeholder="Project owners"
+        formControlName="projectowner"
+        required>
+        <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+          <div class="ng-value" *ngFor="let item of (items ? items: [])">
+            <span class="ng-value-label">{{ item.name }}({{item.email}})</span>
+            <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+          </div>
+          <!-- <div class="ng-value" *ngIf="items.length > 5" >
+            <span class="ng-value-label">{{items.length - 2}} more...</span>
+            <span class="ng-value-label">. . .</span>
+          </div> -->
+        </ng-template>
+        <ng-template ng-option-tmp let-item="item" let-search="searchTerm" let-index="index">
+          <span >{{ item.name + ' (' + item.email + ')' }}</span>
+    </ng-template>
+      </ng-select>
+     
+    
+    </div>
+    
+      <div style="padding:0px 13px">
+      
+          <ng-select style="margin-top: 10px;" [items]="items$ "
+          bindLabel="name"
+          bindValue="_id"
+          [closeOnSelect]="true"
+          [multiple]="true"
+          [hideSelected]="true"
+          [typeahead]="input$"
+          placeholder="Project members"
+          formControlName="projectmembers"
+          required>
+          <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+            <div class="ng-value" *ngFor="let item of (items ? items: [])">
+              <span class="ng-value-label">{{ item.name }}({{item.email}})</span>
+              <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+            </div>
+            <!-- <div class="ng-value" *ngIf="items.length > 5" >
+              <span class="ng-value-label">{{items.length - 2}} more...</span>
+              <span class="ng-value-label">. . .</span>
+            </div> -->
+          </ng-template>
+          <ng-template ng-option-tmp let-item="item" let-search="searchTerm" let-index="index">
+            <span >{{ item.name + ' (' + item.email + ')' }}</span>
+      </ng-template>
+        </ng-select>
+       
+      
+      </div>
+      
+          <div style="padding:0px 13px">
+      
+            <ng-select  [items]="items$"
+            bindLabel="name"
+            bindValue="_id"
+            [closeOnSelect]="true"
+            [multiple]="true"
+            [hideSelected]="true"
+            [typeahead]="input$"
+            placeholder="Project stakeholders"
+            formControlName="projectstakeholders"
+            required>
+            <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+              <div class="ng-value" *ngFor="let item of (items ? items: [])">
+                <span class="ng-value-label">{{ item.name }}({{item.email}})</span>
+                <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+              </div>
+             
+            </ng-template>
+            <ng-template ng-option-tmp let-item="item" let-search="searchTerm" let-index="index">
+              <span >{{ item.name + ' (' + item.email + ')' }}</span>
+        </ng-template>
+          </ng-select>
+        
+          </div>
+          <ion-item>
+            <ion-label>Project status</ion-label>
+            <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet"  clearInput formControlName="projectstatus" placeholder="projectstatus"
+            [ngClass]="{'is-invalid': submitted && f.projectstatus.errors}" required>
+              <ion-select-option value="Started">Started</ion-select-option>
+              <ion-select-option value="Ongoing">Ongoing</ion-select-option>
+              <ion-select-option value="Maintanance">Maintanance</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <div *ngIf="submitted && f.projectstatus.errors">
+            <div *ngIf="f.projectstatus.errors.required">
+              <ion-text>Project status is required</ion-text>
+            </div>
+          </div>
+         
+          <ion-item>
+            <ion-label>Project under</ion-label>
+            <ion-select interface="popover" clearInput formControlName="projectunder" placeholder="select Project field "
+            [ngClass]="{'is-invalid': submitted && f.projectunder.errors}" required>
+              <ion-select-option value="Webdevelopmentorsharepoint">Web development</ion-select-option>
+              <ion-select-option value="Designandgraphics">Design and Graphics</ion-select-option>
+              <ion-select-option value="Contentcreation">Content Creation</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <div *ngIf="submitted && f.projectunder.errors">
+            <div *ngIf="f.projectunder.errors.required">
+              <ion-text>Project status is required</ion-text>
+            </div>
+          </div>
+
+          <ion-item>
+            <ion-label position="floating">Project Link</ion-label>
+            <ion-input name="projectlink" clearInput formControlName="projectlink" placeholder="projectlink"
+            [ngClass]="{'is-invalid': submitted && f.projectlink.errors}" >
+          </ion-input>
+          </ion-item>
+          
+         
+      
+    
+      <ion-button type="submit" style="align-content: center;display: flex;">Add</ion-button>
+    
+      
+
+
+    </form>
+  
+</ion-content>

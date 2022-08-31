@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>signup</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+  <ion-card>
+    <form [formGroup]="signUpForm" (ngSubmit)="onSignup()">
+      <div>
+        <ion-item>
+          <ion-label position="floating">Full Name</ion-label>
+          <ion-input name="name" clearInput formControlName="name" placeholder="name" autofocus
+            [ngClass]="{'is-invalid': submitted && f.name.errors}" required>
+          </ion-input>
+        </ion-item>
+        <div *ngIf="submitted && f.name.errors">
+          <div *ngIf="f.name.errors.required">
+            <ion-text>Name is required</ion-text>
+          </div>
+          <div *ngIf="f.name.errors.pattern">Name is invalid</div>
+        </div>
+        <br>
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input name="email" clearInput formControlName="email" placeholder="Email"
+            [ngClass]="{'is-invalid': submitted && f.email.errors}" required>
+          </ion-input>
+        </ion-item>
+        <div *ngIf="submitted && f.email.errors">
+          <div *ngIf="f.email.errors.required">
+            <ion-text>Email is required</ion-text>
+          </div>
+          <div *ngIf="f.email.errors.email">Email is invalid</div>
+        </div>
+      </div>
+
+      <br>
+
+      <ion-item>
+        <ion-label position="floating">Phone no</ion-label>
+        <ion-input name="ph_no" formControlName="ph_no" type="number" clearInput placeholder="Number"
+          [ngClass]="{ 'is-invalid': submitted && f.ph_no.errors }" required></ion-input>
+      </ion-item>
+      <div *ngIf="submitted && f.ph_no.errors">
+        <div *ngIf="f.ph_no.errors.required">
+          <ion-text>Phoneno is required</ion-text>
+        </div>
+        <div *ngIf="f.ph_no.errors.pattern">
+          <ion-text>Phoneno should be of length 10</ion-text>
+        </div>
+      </div>
+
+      <br>
+   
+        <ion-item>
+          <ion-label position="floating">Password</ion-label>
+          <ion-input type="password" name="password" formControlName="password" required clearInput
+            [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="Password"></ion-input>
+        </ion-item>
+        <div *ngIf="submitted && f.password.errors">
+          <div *ngIf="f.password.errors.required">
+            <ion-text>Password is required</ion-text>
+          </div>
+          <div *ngIf="f.password.errors.minlength">
+            <ion-text>Password must be at least 8 characters</ion-text>
+          </div>
+        </div>
+  
+      <br>
+      <ion-button type="submit" style="align-content: center;display: flex;">signUp
+      </ion-button>
+
+    </form>
+  </ion-card>
+</ion-content>

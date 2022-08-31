@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/Account"></ion-back-button>
+    </ion-buttons>
+    <ion-title>signin</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <form (ngSubmit)="onSignin()" [formGroup]="signInForm">
+      <div>
+        <br>
+        <ion-item>
+          <ion-label position="floating">User Name</ion-label>
+       
+          <ion-input name="id" clearInput formControlName="id" placeholder="Email or Phonenumber"
+            [ngClass]="{'is-invalid': submitted && f.id.errors}" required>
+          </ion-input>
+
+        </ion-item>
+        <div *ngIf="submitted && f.id.errors">
+          <div *ngIf="f.id.errors.required">
+            <ion-text>Username is required</ion-text>
+          </div>
+        </div>
+      </div>
+
+
+      <br>
+      <div>
+        <ion-item>
+          <ion-label position="floating">Password</ion-label>
+          
+          <ion-input type="password" name="password" formControlName="password" required clearInput
+            [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="Password"></ion-input>
+        </ion-item>
+        <div *ngIf="submitted && f.password.errors">
+          <div *ngIf="f.password.errors.required">
+            <ion-text>Password is required</ion-text>
+          </div>
+          <div *ngIf="f.password.errors.minlength">
+            <ion-text>Password must be at least 8 characters</ion-text>
+          </div>
+        </div>
+      </div>
+      
+
+    
+        <ion-button type="submit" style="align-content: center;display: flex;">signIn</ion-button>
+    
+      
+
+
+
+    </form>
+  </ion-card>
+</ion-content>

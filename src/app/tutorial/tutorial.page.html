@@ -1,0 +1,30 @@
+
+
+<ion-content fullscreen >
+  <ion-slides pager="true" >
+    <ion-slide class="step-one">
+      <ion-img src="assets/icon/favicon.png"></ion-img>
+      <h2>Welcome</h2>
+      <p>
+        The <b>App</b> is a practical preview of the UpScale in action, and a
+        demonstration of use.
+      </p>
+      <ion-button color="dark" (click)="next()">Next</ion-button>
+    </ion-slide>
+    <ion-slide class="step-two">
+      <ion-img src="assets/icon/favicon.png"></ion-img>
+      <h2>What is Appflow?</h2>
+            <p>
+              <b>Appflow</b> is a powerful set of services and features built on top of Ionic Framework that brings a
+              totally new level of app development agility to mobile dev teams.
+            </p>
+      <ion-button color="dark" (click)="next()">Next</ion-button>
+    </ion-slide>
+    <ion-slide class="step-three">
+      <ion-img src="assets/icon/favicon.png"></ion-img>
+      <h2>Welcome</h2>
+      <h2>Ready to Play?</h2>
+      <ion-button fill="clear" (click)="finish()">Continue <ion-icon slot="end" name="arrow-forward"></ion-icon></ion-button>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

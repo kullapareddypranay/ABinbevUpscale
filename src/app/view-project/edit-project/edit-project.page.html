@@ -1,0 +1,161 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()">Cancel</ion-button>
+    </ion-buttons>
+    <ion-title>{{project.projecttitle | uppercase}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirm()">Confirm</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-label position="stacked">Project Title</ion-label>
+    
+  
+    <ion-input [(ngModel)]="project.projecttitle" placeholder="projecttitle"  type="text" disabled></ion-input>
+  
+  <ion-label position="stacked">Project Description</ion-label>
+    
+ 
+    <ion-input [(ngModel)]="project.projectdescription" placeholder="projectdescription"  type="text" disabled></ion-input>
+ 
+  
+    <ion-label position="stacked">Project owners</ion-label>
+  <div *ngFor="let ele of project.projectowner">
+
+    
+    <ion-chip>
+      <ion-avatar>
+        <img
+          src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjYzVkYmZmIiBkPSJNMCAwaDUxMnY1MTJIMHoiLz48cGF0aCBkPSJNMjU2IDMwNGM2MS42IDAgMTEyLTUwLjQgMTEyLTExMlMzMTcuNiA4MCAyNTYgODBzLTExMiA1MC40LTExMiAxMTIgNTAuNCAxMTIgMTEyIDExMnptMCA0MGMtNzQuMiAwLTIyNCAzNy44LTIyNCAxMTJ2NTZoNDQ4di01NmMwLTc0LjItMTQ5LjgtMTEyLTIyNC0xMTJ6IiBmaWxsPSIjODJhZWZmIi8+PC9zdmc+"
+        />
+      </ion-avatar>
+      <ion-label>{{ele.name}}</ion-label>
+    </ion-chip>
+    
+   
+   
+  </div>
+  <ion-label position="stacked"> Project members</ion-label>
+  <div *ngFor="let ele of project.projectmembers" >
+
+    
+    <ion-chip>
+      <ion-avatar>
+        <img
+          src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjYzVkYmZmIiBkPSJNMCAwaDUxMnY1MTJIMHoiLz48cGF0aCBkPSJNMjU2IDMwNGM2MS42IDAgMTEyLTUwLjQgMTEyLTExMlMzMTcuNiA4MCAyNTYgODBzLTExMiA1MC40LTExMiAxMTIgNTAuNCAxMTIgMTEyIDExMnptMCA0MGMtNzQuMiAwLTIyNCAzNy44LTIyNCAxMTJ2NTZoNDQ4di01NmMwLTc0LjItMTQ5LjgtMTEyLTIyNC0xMTJ6IiBmaWxsPSIjODJhZWZmIi8+PC9zdmc+"
+        />
+      </ion-avatar>
+      <ion-label>{{ele.name}}</ion-label>
+      <ion-icon name="close-circle" (click)="removemembers(ele)"></ion-icon>
+    </ion-chip>
+    
+   
+   
+  </div>
+
+  <ion-item lines="none"><button (click)="openAddMembers()" slot="end" fill="clear">{{addmemberstext}}</button></ion-item>
+  
+  <div *ngIf="addmembers">
+    <ion-label>Add Project members</ion-label>
+  
+    <ion-label>
+      <ng-select  [items]="items$"
+    bindLabel="name"
+    [closeOnSelect]="true"
+    [hideSelected]="true"
+    [typeahead]="input$"
+    placeholder="project members"
+    [(ngModel)]="projectmembers"
+    required>
+    <ng-template ng-option-tmp let-item="item" let-search="searchTerm" let-index="index">
+      <span >{{ item.name + ' (' + item.email + ')' }}</span>
+    </ng-template>
+  </ng-select>
+  <ion-item lines="none">
+    <ion-button fill="clear" slot="end" (click)="addMembers()">Ok</ion-button>
+  </ion-item>
+  </ion-label>
+  </div>
+  <ion-label position="stacked"> Project stakeholders</ion-label>
+  <div *ngFor="let ele of project.projectstakeholders">
+
+    
+    <ion-chip>
+      <ion-avatar>
+        <img
+          src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjYzVkYmZmIiBkPSJNMCAwaDUxMnY1MTJIMHoiLz48cGF0aCBkPSJNMjU2IDMwNGM2MS42IDAgMTEyLTUwLjQgMTEyLTExMlMzMTcuNiA4MCAyNTYgODBzLTExMiA1MC40LTExMiAxMTIgNTAuNCAxMTIgMTEyIDExMnptMCA0MGMtNzQuMiAwLTIyNCAzNy44LTIyNCAxMTJ2NTZoNDQ4di01NmMwLTc0LjItMTQ5LjgtMTEyLTIyNC0xMTJ6IiBmaWxsPSIjODJhZWZmIi8+PC9zdmc+"
+        />
+      </ion-avatar>
+      <ion-label>{{ele.name}}</ion-label>
+      <ion-icon name="close-circle" (click)="removestackholders(ele)"></ion-icon>
+    </ion-chip>
+    
+   
+   
+  </div>
+  <ion-item lines="none"><button (click)="openAddstackMembers()" slot="end" fill="clear">{{addstackmemberstext}}</button></ion-item>
+  <div *ngIf="addstackmembers">
+    <ion-label>Add Project stakeholders</ion-label>
+  
+  <ion-label>
+    <ng-select  [items]="items$"
+  bindLabel="name"
+  [closeOnSelect]="true"
+  [hideSelected]="true"
+  [typeahead]="input$"
+  placeholder="project stakeholders"
+  [(ngModel)]="projectstackholders"
+  required>
+  <ng-template ng-option-tmp let-item="item" let-search="searchTerm" let-index="index">
+    <span >{{ item.name + ' (' + item.email + ')' }}</span>
+  </ng-template>
+</ng-select>
+<ion-item lines="none">
+  <ion-button fill="clear" slot="end" (click)="addstackMembers()">Ok</ion-button>
+</ion-item>
+</ion-label>
+  </div>
+  
+  <ion-item>
+    <ion-label position="floating">Project start date</ion-label>
+    <ion-input value="{{project.projectstartdate|date}}" id="date" clearInput  required></ion-input>   
+    <ion-popover trigger="date" size="cover">
+      <ng-template>
+        <ion-datetime   #datetime presentation="date" displayFormat="YYYY-MM-DD"  [(ngModel)]="project.projectstartdate"  [ngModelOptions]="{standalone: true}" required  >
+          <ion-buttons slot="buttons">
+            <ion-button color="danger" (click)="datetime.reset()" >Reset</ion-button>
+            <ion-button color="primary" (click)="datetime.cancel()" (click)="cancel1()">Never mind</ion-button>
+            <ion-button color="primary" (click)="datetime.confirm()" (click)="close()">All Set</ion-button>
+          </ion-buttons>
+        </ion-datetime>
+ 
+      </ng-template>
+
+    </ion-popover>
+    
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Project Link</ion-label>
+    <ion-input name="projectlink" clearInput [(ngModel)]="project.projectlink">
+  </ion-input>
+  </ion-item>
+    
+  <ion-item>
+    <ion-label>Project under</ion-label>
+    <ion-select interface="popover" [(ngModel)]="project.projectstatus" placeholder="select Project field "
+   >
+     
+      <ion-select-option value="Started">Started</ion-select-option>
+              <ion-select-option value="Ongoing">Ongoing</ion-select-option>
+              <ion-select-option value="Maintanance">Maintanance</ion-select-option>
+    </ion-select>
+  </ion-item>
+  
+  
+  
+ 
+  
+</ion-content>

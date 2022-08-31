@@ -1,6 +1,15 @@
+import { User } from "./user";
+
 export interface Project {
-    Title:string,
-    Description:string,
-    ProjectMembers:[],
-    ProjectStatus:string
+    _id:string,
+    projecttitle:string,
+    projectdescription:string,
+    projectstatus:string,
+    projectmembers:User[],
+    projectstakeholders:User[],
+    projectstartdate:Date,
+    projectunder:string,
+    projectowner:User[],
+    projectlink:string
+
 }

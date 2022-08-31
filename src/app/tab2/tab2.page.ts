@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Project } from '../interfaces/project';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ProjectService } from '../services/project.service';
 
 @Component({
   selector: 'app-tab2',
@@ -8,16 +10,17 @@ import { Project } from '../interfaces/project';
 })
 export class Tab2Page {
   projects: Project[] = [
-    { "Title": 'Employeehub', "Description": "Africa site workday","ProjectStatus":"maintanance","ProjectMembers":[] },
-    { "Title": 'Talent and management', "Description": "T and D","ProjectStatus":"maintanance","ProjectMembers":[] },
-    { "Title": 'ABI analytics', "Description": "T and D","ProjectStatus":"maintanance","ProjectMembers":[] },
-    { "Title": 'cop', "Description": "T and D","ProjectStatus":"maintanance","ProjectMembers":[] },
-    { "Title": 'LCA', "Description": "T and D","ProjectStatus":"maintanance","ProjectMembers":[] },
-    { "Title": 'LCA-hub', "Description": "T and D","ProjectStatus":"maintanance","ProjectMembers":[] },
-    { "Title": 'LCA-2', "Description": "T and D","ProjectStatus":"maintanance","ProjectMembers":[] },
-    { "Title": 'LCA-3', "Description": "T and D","ProjectStatus":"maintanance","ProjectMembers":[] },
-    { "Title": 'LCA-4', "Description": "T and D","ProjectStatus":"maintanance","ProjectMembers":[] }
-  ];
-  constructor() {}
+   ];
+  constructor(private router: Router,
+    private route: ActivatedRoute,private projectService:ProjectService) {}
+  ionViewWillEnter() {
+    this.projectService.getProjects().subscribe((res)=>{
+      this.projects=res.body
+    })
+  }
+  viewProject(id){
+    this.router.navigate(['view-project',id],{relativeTo:this.route})
+  }
+
 
 }
